@@ -48,7 +48,6 @@ void handle_client(SOCKET client) {
     std::ostringstream response;
 
     if (!body.empty()) {
-        std::cout << "200 OK - " << path << "\n";
         response << "HTTP/1.1 200 OK\r\n"
                  << "Content-Type: " << get_mime_type(full_path) << "\r\n"
                  << "Content-Length: " << body.size() << "\r\n"
@@ -56,7 +55,6 @@ void handle_client(SOCKET client) {
                  << body;
     } else {
         std::string msg = "<h1>404 Not Found</h1>";
-        std::cout << "404 Not Found - " << path << "\n";
         response << "HTTP/1.1 404 Not Found\r\n"
                  << "Content-Type: text/html\r\n"
                  << "Content-Length: " << msg.size() << "\r\n"
@@ -68,21 +66,33 @@ void handle_client(SOCKET client) {
     closesocket(client);
 }
 
+void print_usage() {
+    std::cout << "\nSimple C++ HTTP Server\n";
+    std::cout << "Usage:\n";
+    std::cout << "    cpp_webserver.exe [subfolder] [port]\n";
+    std::cout << "    cpp_webserver.exe --usage\n\n";
+    std::cout << "Where:\n";
+    std::cout << "    [subfolder]   Optional folder to serve (default: current folder)\n";
+    std::cout << "    [port]        Optional port number (default: 8080)\n\n";
+    std::cout << "Example:\n";
+    std::cout << "    cpp_webserver.exe webappfolder 9090\n";
+    std::cout << "    cpp_webserver.exe\n\n";
+}
+
 int main(int argc, char* argv[]) {
-    if (argc < 2) {
-        std::cout << "\nSimple HTTP Server\n";
-        std::cout << "Usage:\n";
-        std::cout << "    cpp_webserver.exe <subfolder> [port]\n\n";
-        std::cout << "Where:\n";
-        std::cout << "    <subfolder>   Folder name under current directory to serve (e.g., 'webapp_example')\n";
-        std::cout << "    [port]        Optional port number (default: 8080)\n\n";
-        std::cout << "Example:\n";
-        std::cout << "    cpp_webserver.exe webapp_example 9090\n";
-        return 1;
+    if (argc >= 2 && std::string(argv[1]) == "--usage") {
+        print_usage();
+        return 0;
     }
 
     std::filesystem::path exe_path = std::filesystem::current_path();
-    std::string folder = argv[1];
+
+    if (argc == 1) {
+        std::cout << "\nNo parameters provided. Defaulting to current directory and port 8080.\n";
+        std::cout << "To see usage help, run with: --usage\n\n";
+    }
+
+    std::string folder = (argc >= 2) ? argv[1] : ".";
     g_port = (argc >= 3) ? std::stoi(argv[2]) : 8080;
     g_root = exe_path / folder;
 
@@ -92,7 +102,7 @@ int main(int argc, char* argv[]) {
     }
 
     std::cout << "Serving from: " << g_root << "\n";
-    std::cout << "Listening at: http://localhost:" << g_port << "\n";
+    std::cout << "Visit: http://localhost:" << g_port << "\n";
 
     WSADATA wsa;
     WSAStartup(MAKEWORD(2, 2), &wsa);

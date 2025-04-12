@@ -55,8 +55,8 @@ http://localhost:9090
 If / is requested, the server will attempt to return /index.html.
 
 ### Testing It
-- Create a folder webapp_example in the same directory as the executable.
-- Put an index.html inside webapp_example.
+- Create a folder webappfolder in the same directory as the executable.
+- Put an index.html inside webappfolder.
 - Launch the server as:
 
 ```cmd
@@ -64,6 +64,42 @@ cpp_webserver.exe webappfolder
 ```
 
 Then open http://localhost:8080 in your browser.
+
+## Smart Defaults & Usage Flag
+
+If you run cpp_webserver.exe without any parameters:
+
+- It automatically serves from the current working directory.
+- It uses port 8080 by default.
+- It prints a quick reminder for usage:
+
+```cmd
+No parameters provided. Defaulting to current directory and port 8080.
+To see usage help, run with: --usage
+```
+
+To explicitly see help:
+
+```cmd
+cpp_webserver.exe --usage
+```
+
+This prints a usage guide as follows:
+
+```cmd
+Simple C++ HTTP Server
+Usage:
+    cpp_webserver.exe [subfolder] [port]
+    cpp_webserver.exe --usage
+
+Where:
+    [subfolder]   Optional folder to serve (default: current folder)
+    [port]        Optional port number (default: 8080)
+
+Example:
+    cpp_webserver.exe webappfolder 9090
+    cpp_webserver.exe
+```
 
 ## Notes
 - This project currently supports only Windows using WinSock.
