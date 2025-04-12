@@ -67,7 +67,7 @@ void handle_client(SOCKET client) {
 }
 
 void print_usage() {
-    std::cout << "\nSimple C++ HTTP Server\n";
+    std::cout << "\nSimple HTTP Server\n";
     std::cout << "Usage:\n";
     std::cout << "    cpp_webserver.exe [subfolder] [port]\n";
     std::cout << "    cpp_webserver.exe --usage\n\n";

@@ -87,7 +87,7 @@ cpp_webserver.exe --usage
 This prints a usage guide as follows:
 
 ```cmd
-Simple C++ HTTP Server
+Simple HTTP Server
 Usage:
     cpp_webserver.exe [subfolder] [port]
     cpp_webserver.exe --usage
