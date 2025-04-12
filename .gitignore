@@ -1,0 +1,48 @@
+# --- Build folders ---
+/build/
+/build_*/
+/core-install/
+/**/build/
+/**/build_*/
+/CMakeFiles/
+/CMakeCache.txt
+/cmake_install.cmake
+/Makefile
+
+# --- Qt + MOC artifacts ---
+/**/moc_*.cpp
+/**/moc_*.obj
+/**/ui_*.h
+/**/qrc_*.cpp
+/**/CMakeFiles/
+/**/*.autosave
+/.qt/
+/**/.qt/
+
+# --- Compiled binaries ---
+/*.dll
+/*.exe
+/**/*.dll
+/**/*.exe
+/**/*.obj
+/**/*.o
+/**/*.so
+/**/*.a
+
+# --- Logs and temp files ---
+/*.log
+/**/*.log
+*.tmp
+*.bak
+engine.log
+
+# --- VSCode/IDE files ---
+.vscode/
+.idea/
+*.user
+*.workspace
+
+# --- OS-specific ---
+.DS_Store
+Thumbs.db
+desktop.ini
