@@ -70,7 +70,7 @@ void handle_client(SOCKET client) {
 
 int main(int argc, char* argv[]) {
     if (argc < 2) {
-        std::cout << "\nSimple C++ HTTP Server\n";
+        std::cout << "\nSimple HTTP Server\n";
         std::cout << "Usage:\n";
         std::cout << "    cpp_webserver.exe <subfolder> [port]\n\n";
         std::cout << "Where:\n";
